@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1a0f0a">
+<meta name="description" content="Dreams Cafe Karnal — Restaurant Menu. Order on WhatsApp.">
+<title>Menu — Dreams Cafe</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --cream:#fdf6e9;
+    --cream-soft:#f5e8d0;
+    --cream-deep:#ecd9b8;
+    --ink:#2b1a0f;
+    --ink-soft:#5a4030;
+    --ink-dim:#8a7058;
+    --orange:#e85c1f;
+    --orange-bright:#ff7a2f;
+    --orange-deep:#c94a12;
+    --red:#d63829;
+    --green:#3d8b3d;
+  }
+
+  *{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  html{
+    background:var(--cream);
+    scroll-behavior:smooth;
+    -webkit-text-size-adjust:100%;
+  }
+
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:
+      radial-gradient(ellipse at top, #fff8ea 0%, #fdf6e9 45%, #f5e8d0 100%);
+    background-attachment:fixed;
+    color:var(--ink);
+    min-height:100vh;
+    overflow-x:hidden;
+    line-height:1.5;
+    padding-bottom:120px;
+    font-weight:400;
+    letter-spacing:0.1px;
+    font-feature-settings:"kern" 1, "liga" 1;
+  }
+
+  body.no-scroll{ overflow:hidden; }
+
+  body::before{
+    content:'';
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:6px;
+    background:repeating-linear-gradient(
+      90deg,
+      var(--orange) 0px,
+      var(--orange) 22px,
+      var(--cream) 22px,
+      var(--cream) 44px,
+      var(--red) 44px,
+      var(--red) 66px,
+      var(--cream) 66px,
+      var(--cream) 88px
+    );
+    z-index:200;
+    pointer-events:none;
+  }
+
+  body::after{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:
+      radial-gradient(circle at 25% 15%, rgba(232,92,31,0.045) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(214,56,41,0.04) 0%, transparent 45%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .topbar,
+  .hero,
+  .legend,
+  .filter-wrap,
+  .menu-wrap,
+  .menu-note,
+  .footer,
+  .bottombar{
+    position:relative;
+    z-index:1;
+  }
+
+  .topbar{
+    position:sticky;
+    top:6px;
+    z-index:100;
+    background:rgba(253,246,233,0.94);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-bottom:2px solid rgba(232,92,31,0.15);
+    padding:12px 14px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .logo-block{
+    flex:1;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+  }
+
+  .logo-dreams{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:30px;
+    font-weight:400;
+    color:var(--ink);
+    letter-spacing:2px;
+    line-height:0.95;
+  }
+
+  .logo-cafe{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:20px;
+    color:var(--orange);
+    letter-spacing:6px;
+    line-height:1;
+    margin-top:2px;
+  }
+
+  .logo-tagline{
+    font-family:'Inter',sans-serif;
+    font-size:8px;
+    letter-spacing:2.5px;
+    color:var(--ink-dim);
+    text-transform:uppercase;
+    font-weight:600;
+    margin-top:5px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .cart-btn{
+    position:relative;
+    flex-shrink:0;
+    width:46px;
+    height:46px;
+    border-radius:14px;
+    background:var(--orange);
+    border:none;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:all .25s;
+    box-shadow:0 4px 14px rgba(232,92,31,0.3);
+  }
+
+  .cart-btn:active{
+    transform:scale(0.94);
+  }
+
+  .cart-btn svg{ width:22px; height:22px; stroke-width:2; }
+
+  .cart-btn.has-items{ animation:cartGlow 2.4s ease-in-out infinite; }
+
+  @keyframes cartGlow{
+    0%,100%{ box-shadow:0 4px 14px rgba(232,92,31,0.3); }
+    50%{ box-shadow:0 4px 22px rgba(232,92,31,0.65); }
+  }
+
+  .cart-count{
+    position:absolute;
+    top:-6px;
+    right:-6px;
+    min-width:22px;
+    height:22px;
+    padding:0 6px;
+    border-radius:11px;
+    background:var(--ink);
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-variant-numeric:tabular-nums;
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+    box-shadow:0 3px 10px rgba(0,0,0,0.3);
+    border:2px solid var(--cream);
+  }
+
+  .cart-count.hidden{ transform:scale(0); }
+  .cart-count.bounce{ animation:cartBounce .5s cubic-bezier(.34,1.56,.64,1); }
+
+  @keyframes cartBounce{
+    0%{ transform:scale(1); }
+    40%{ transform:scale(1.4); }
+    100%{ transform:scale(1); }
+  }
+
+  .hero{
+    padding:32px 20px 20px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero::before{
+    content:'';
+    position:absolute;
+    top:-40%;
+    left:50%;
+    transform:translateX(-50%);
+    width:460px;
+    height:460px;
+    background:radial-gradient(circle, rgba(232,92,31,0.10) 0%, transparent 65%);
+    pointer-events:none;
+    filter:blur(30px);
+    animation:heroGlow 7s ease-in-out infinite;
+  }
+
+  @keyframes heroGlow{
+    0%,100%{ opacity:.6; transform:translateX(-50%) scale(1); }
+    50%{ opacity:1; transform:translateX(-50%) scale(1.1); }
+  }
+
+  .hero-eyebrow{
+    position:relative;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:12px;
+    letter-spacing:6px;
+    color:var(--orange);
+    text-transform:uppercase;
+    font-weight:400;
+    margin-bottom:12px;
+    animation:fadeInDown .8s ease .1s both;
+  }
+
+  .hero-title{
+    position:relative;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:64px;
+    font-weight:400;
+    color:var(--ink);
+    letter-spacing:4px;
+    line-height:0.95;
+    margin-bottom:14px;
+    animation:fadeInDown .8s ease .2s both;
+  }
+
+  .hero-title .accent{
+    color:var(--orange);
+    position:relative;
+    display:inline-block;
+  }
+
+  .hero-title .accent::after{
+    content:'';
+    position:absolute;
+    bottom:6px;
+    left:0;
+    right:0;
+    height:6px;
+    background:var(--orange);
+    opacity:0.25;
+    border-radius:3px;
+  }
+
+  .hero-sub{
+    position:relative;
+    font-size:14px;
+    color:var(--ink-soft);
+    font-weight:500;
+    letter-spacing:0.3px;
+    animation:fadeInDown .8s ease .3s both;
+    max-width:360px;
+    margin:0 auto;
+    line-height:1.5;
+  }
+
+  .hero-sub::after{
+    content:'';
+    display:block;
+    width:60px;
+    height:3px;
+    margin:18px auto 0;
+    background:var(--orange);
+    border-radius:2px;
+    opacity:0.85;
+    animation:lineGrow 1s ease .6s both;
+  }
+
+  @keyframes lineGrow{
+    from{ width:0; opacity:0; }
+    to{ width:60px; opacity:0.85; }
+  }
+
+  .legend{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:22px;
+    padding:6px 20px 18px;
+    animation:fadeIn .8s ease .5s both;
+  }
+
+  .legend-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:700;
+  }
+
+  .legend-mark{
+    width:14px;
+    height:14px;
+    border-radius:3px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    flex-shrink:0;
+    border:2px solid var(--green);
+    background:#fff;
+  }
+
+  .legend-mark::before{
+    content:'';
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--green);
+  }
+
+  .filter-wrap{
+    position:sticky;
+    top:76px;
+    z-index:90;
+    background:rgba(253,246,233,0.96);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-bottom:2px solid rgba(232,92,31,0.12);
+    padding:10px 0;
+  }
+
+  .filter-bar{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:0 14px 6px;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    scroll-behavior:smooth;
+  }
+
+  .filter-bar::-webkit-scrollbar{ display:none; }
+
+  .filter-chip{
+    flex-shrink:0;
+    padding:10px 18px;
+    border-radius:22px;
+    background:#fff;
+    border:2px solid rgba(43,26,15,0.12);
+    color:var(--ink-soft);
+    font-family:inherit;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:0.8px;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:all .3s cubic-bezier(.2,.8,.3,1);
+    white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+  }
+
+  .filter-chip:active{ transform:scale(0.95); }
+
+  .filter-chip.active{
+    background:var(--orange);
+    color:#fff;
+    border-color:var(--orange);
+    box-shadow:0 4px 16px rgba(232,92,31,0.35);
+  }
+
+  .menu-wrap{
+    max-width:680px;
+    margin:0 auto;
+    padding:24px 14px 0;
+  }
+
+  .category{
+    margin-bottom:36px;
+    animation:fadeInUp .6s ease backwards;
+  }
+
+  .category.hidden{ display:none; }
+
+  .category-header{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:18px;
+    padding:0 4px;
+  }
+
+  .category-line{
+    flex:1;
+    height:2px;
+    background:linear-gradient(90deg, var(--orange), transparent);
+    opacity:.4;
+    border-radius:2px;
+  }
+
+  .category-line.right{
+    background:linear-gradient(90deg, transparent, var(--orange));
+  }
+
+  .category-title{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:30px;
+    font-weight:400;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    white-space:nowrap;
+    color:var(--ink);
+    position:relative;
+  }
+
+  .dish{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:18px 20px;
+    margin-bottom:10px;
+    border-radius:14px;
+    background:#fff;
+    border:1.5px solid rgba(43,26,15,0.08);
+    position:relative;
+    overflow:hidden;
+    transition:all .35s cubic-bezier(.2,.8,.3,1);
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(14px);
+    box-shadow:0 2px 8px rgba(43,26,15,0.04);
+  }
+
+  .dish.revealed{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .dish::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg, transparent 40%, rgba(232,92,31,0.14) 50%, transparent 60%);
+    transform:translateX(-100%);
+    transition:transform .8s ease;
+    pointer-events:none;
+    z-index:1;
+  }
+
+  .dish:active::before{ transform:translateX(100%); }
+
+  .dish:active{
+    transform:scale(0.985);
+    border-color:var(--orange);
+    background:#fffaf2;
+  }
+
+  .dish.ripple{ animation:dishRipple .5s ease; }
+
+  @keyframes dishRipple{
+    0%{ background:rgba(232,92,31,0.18); }
+    100%{ background:#fff; }
+  }
+
+  .veg-mark{
+    flex-shrink:0;
+    width:18px;
+    height:18px;
+    border:2px solid var(--green);
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    background:#fff;
+    z-index:2;
+  }
+
+  .veg-mark::before{
+    content:'';
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--green);
+  }
+
+  .dish-info{
+    flex:1;
+    min-width:0;
+    position:relative;
+    z-index:2;
+  }
+
+  .dish-name{
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px;
+    font-weight:700;
+    color:var(--ink);
+    line-height:1.2;
+    letter-spacing:0.2px;
+    margin-bottom:3px;
+  }
+
+  .dish-note{
+    font-size:12px;
+    color:var(--ink-dim);
+    font-style:italic;
+    line-height:1.4;
+    letter-spacing:0.2px;
+    font-weight:500;
+  }
+
+  .dish-price-wrap{
+    flex-shrink:0;
+    text-align:right;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    justify-content:center;
+    position:relative;
+    z-index:2;
+    min-width:70px;
+  }
+
+  .dish-price{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:28px;
+    font-weight:400;
+    color:var(--orange);
+    letter-spacing:1px;
+    line-height:1;
+    white-space:nowrap;
+    font-variant-numeric:tabular-nums lining-nums;
+  }
+
+  .dish-price .rupee{
+    font-size:18px;
+    margin-right:1px;
+    opacity:0.85;
+  }
+
+  .half-full-wrap{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    align-items:flex-end;
+  }
+
+  .hf-label{
+    font-size:9px;
+    letter-spacing:1.5px;
+    color:var(--orange-deep);
+    text-transform:uppercase;
+    font-weight:800;
+    margin-bottom:2px;
+  }
+
+  .hf-price-row{
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+    justify-content:flex-end;
+  }
+
+  .hf-tag{
+    font-size:10px;
+    color:var(--ink-dim);
+    letter-spacing:0.8px;
+    text-transform:uppercase;
+    font-weight:700;
+    min-width:30px;
+    text-align:left;
+  }
+
+  .hf-value{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:22px;
+    font-weight:400;
+    color:var(--orange);
+    letter-spacing:0.5px;
+    line-height:1;
+    font-variant-numeric:tabular-nums lining-nums;
+    min-width:56px;
+    text-align:right;
+  }
+
+  .hf-value .rupee{
+    font-size:14px;
+    margin-right:1px;
+    opacity:0.85;
+  }  /* ============ MENU NOTE ============ */
+  .menu-note{
+    max-width:680px;
+    margin:40px auto 0;
+    padding:20px 22px;
+    border-left:4px solid var(--orange);
+    background:#fff;
+    border-radius:0 10px 10px 0;
+    font-size:12px;
+    color:var(--ink-soft);
+    font-style:italic;
+    line-height:1.7;
+    letter-spacing:0.2px;
+    box-shadow:0 2px 8px rgba(43,26,15,0.04);
+  }
+
+  .menu-note p{ margin-bottom:6px; }
+  .menu-note p:last-child{ margin-bottom:0; }
+
+  /* ============ FOOTER ============ */
+  .footer{
+    text-align:center;
+    padding:38px 20px 26px;
+    margin-top:40px;
+    border-top:2px dashed rgba(232,92,31,0.18);
+  }
+
+  .footer-location{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:16px;
+    letter-spacing:5px;
+    color:var(--orange);
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+
+  .footer-powered{
+    display:inline-block;
+    margin-top:20px;
+    font-size:10px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    text-decoration:none;
+    opacity:0.7;
+    transition:opacity .3s ease;
+    font-weight:600;
+  }
+
+  .footer-powered span{
+    font-family:'Cormorant Garamond',serif;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:3px;
+    color:var(--orange);
+    font-style:italic;
+  }
+
+  .footer-powered:active,
+  .footer-powered:hover{
+    opacity:1;
+  }
+
+  /* ============ STICKY BOTTOM BAR ============ */
+  .bottombar{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:90;
+    background:rgba(253,246,233,0.98);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-top:2px solid rgba(232,92,31,0.18);
+    padding:12px 14px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+    transform:translateY(0);
+    transition:transform .4s cubic-bezier(.2,.8,.3,1);
+  }
+
+  .bottombar.hide-on-top{ transform:translateY(100%); }
+
+  .bottom-action{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:14px 10px;
+    border-radius:14px;
+    background:#fff;
+    border:2px solid rgba(43,26,15,0.12);
+    color:var(--ink);
+    text-decoration:none;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    transition:all .25s;
+    cursor:pointer;
+    font-family:inherit;
+  }
+
+  .bottom-action:active{
+    transform:scale(0.97);
+  }
+
+  .bottom-action.primary{
+    background:var(--orange);
+    border-color:var(--orange);
+    color:#fff;
+    box-shadow:0 4px 16px rgba(232,92,31,0.35);
+  }
+
+  .bottom-action svg{ width:17px; height:17px; stroke-width:2.2; }
+
+  /* ============ MODAL ============ */
+  .modal-backdrop{
+    position:fixed;
+    inset:0;
+    background:rgba(43,26,15,0.55);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    z-index:200;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .35s ease;
+  }
+
+  .modal-backdrop.show{
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  .modal{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    max-height:88vh;
+    background:var(--cream);
+    border-top-left-radius:24px;
+    border-top-right-radius:24px;
+    border-top:3px solid var(--orange);
+    box-shadow:0 -20px 60px rgba(0,0,0,0.35);
+    z-index:210;
+    transform:translateY(100%);
+    transition:transform .45s cubic-bezier(.2,.9,.3,1);
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .modal.show{ transform:translateY(0); }
+
+  .modal-handle{
+    width:46px;
+    height:5px;
+    border-radius:3px;
+    background:rgba(232,92,31,0.35);
+    margin:12px auto 8px;
+  }
+
+  .modal-close{
+    position:absolute;
+    top:16px;
+    right:16px;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#fff;
+    border:2px solid rgba(43,26,15,0.12);
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:all .2s;
+    z-index:2;
+  }
+
+  .modal-close:active{ transform:scale(0.9); }
+  .modal-close svg{ width:18px; height:18px; stroke-width:2.5; }
+
+  .modal-content{ padding:16px 22px 32px; }
+
+  .modal-eyebrow{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:13px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:var(--green);
+  }
+
+  .modal-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:34px;
+    font-weight:700;
+    color:var(--ink);
+    letter-spacing:0.3px;
+    line-height:1.1;
+    margin-bottom:14px;
+  }
+
+  .modal-desc{
+    font-size:14px;
+    color:var(--ink-soft);
+    font-style:italic;
+    line-height:1.6;
+    margin-bottom:20px;
+  }
+
+  .modal-divider{
+    width:60px;
+    height:3px;
+    background:var(--orange);
+    border-radius:2px;
+    margin:20px 0;
+    opacity:0.85;
+  }
+
+  /* ============ PORTION SELECTOR ============ */
+  .portion-section{ margin-top:20px; }
+
+  .portion-label{
+    font-size:11px;
+    letter-spacing:2.5px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    font-weight:800;
+    margin-bottom:12px;
+  }
+
+  .portion-options{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .portion-btn{
+    flex:1;
+    min-width:130px;
+    padding:16px 18px;
+    border-radius:14px;
+    background:#fff;
+    border:2px solid rgba(43,26,15,0.12);
+    color:var(--ink);
+    cursor:pointer;
+    transition:all .25s;
+    font-family:inherit;
+    text-align:left;
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .portion-btn:active{ transform:scale(0.97); }
+
+  .portion-btn.selected{
+    background:#fff5eb;
+    border-color:var(--orange);
+    box-shadow:0 4px 16px rgba(232,92,31,0.2);
+  }
+
+  .portion-btn.locked{
+    opacity:0.35;
+    cursor:not-allowed;
+    pointer-events:none;
+  }
+
+  .portion-btn-text{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    flex:1;
+    min-width:0;
+  }
+
+  .portion-btn-label{
+    font-size:11px;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:800;
+  }
+
+  .portion-btn.selected .portion-btn-label{ color:var(--orange); }
+
+  .portion-btn-price{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:24px;
+    font-weight:400;
+    color:var(--ink);
+    line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+
+  .portion-btn.selected .portion-btn-price{ color:var(--orange); }
+
+  /* ============ MODAL ACTIONS ============ */
+  .modal-actions{
+    display:flex;
+    gap:10px;
+    margin-top:26px;
+    align-items:center;
+  }
+
+  .qty-control{
+    display:flex;
+    align-items:center;
+    background:#fff;
+    border:2px solid rgba(43,26,15,0.12);
+    border-radius:14px;
+    overflow:hidden;
+  }
+
+  .qty-btn{
+    width:46px;
+    height:52px;
+    background:transparent;
+    border:none;
+    color:var(--orange);
+    font-size:22px;
+    font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+    transition:background .2s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .qty-btn:active{ background:#fff5eb; }
+
+  .qty-value{
+    width:42px;
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:24px;
+    color:var(--ink);
+    border-left:1.5px solid rgba(43,26,15,0.08);
+    border-right:1.5px solid rgba(43,26,15,0.08);
+    font-variant-numeric:tabular-nums;
+  }
+
+  .add-to-cart-btn{
+    flex:1;
+    padding:16px 18px;
+    border-radius:14px;
+    background:var(--orange);
+    border:none;
+    color:#fff;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:all .25s;
+    box-shadow:0 6px 20px rgba(232,92,31,0.35);
+    font-variant-numeric:tabular-nums;
+  }
+
+  .add-to-cart-btn:active{
+    transform:scale(0.97);
+    background:var(--orange-deep);
+  }
+
+  .add-to-cart-btn:disabled{
+    opacity:0.4;
+    cursor:not-allowed;
+    box-shadow:none;
+  }
+
+  /* ============ CART DRAWER ============ */
+  .cart-drawer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    max-height:80vh;
+    background:var(--cream);
+    border-top-left-radius:24px;
+    border-top-right-radius:24px;
+    border-top:3px solid var(--orange);
+    box-shadow:0 -20px 60px rgba(0,0,0,0.35);
+    z-index:220;
+    transform:translateY(100%);
+    transition:transform .45s cubic-bezier(.2,.9,.3,1);
+    display:flex;
+    flex-direction:column;
+  }
+
+  .cart-drawer.show{ transform:translateY(0); }
+
+  .cart-header{
+    padding:16px 22px 14px;
+    border-bottom:1.5px solid rgba(43,26,15,0.08);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:relative;
+  }
+
+  .cart-title{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:28px;
+    font-weight:400;
+    color:var(--ink);
+    letter-spacing:3px;
+  }
+
+  .cart-table-tag{
+    font-size:10px;
+    letter-spacing:2px;
+    color:var(--orange);
+    text-transform:uppercase;
+    font-weight:800;
+    padding:5px 12px;
+    background:#fff5eb;
+    border-radius:20px;
+    margin-left:10px;
+    border:1.5px solid rgba(232,92,31,0.2);
+  }
+
+  .cart-empty{ padding:52px 22px; text-align:center; }
+
+  .cart-empty-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:24px;
+    color:var(--ink-soft);
+    font-style:italic;
+    margin-bottom:8px;
+    font-weight:600;
+  }
+
+  .cart-empty-desc{
+    font-size:13px;
+    color:var(--ink-dim);
+    line-height:1.6;
+  }
+
+  .cart-items{
+    padding:14px 22px;
+    overflow-y:auto;
+    flex:1;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .cart-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 0;
+    border-bottom:1.5px dashed rgba(43,26,15,0.1);
+    animation:cartItemIn .35s ease;
+  }
+
+  .cart-item:last-child{ border-bottom:none; }
+
+  @keyframes cartItemIn{
+    from{ opacity:0; transform:translateX(-10px); }
+    to{ opacity:1; transform:translateX(0); }
+  }
+
+  .cart-item-info{ flex:1; min-width:0; }
+
+  .cart-item-name{
+    font-family:'Cormorant Garamond',serif;
+    font-size:17px;
+    font-weight:700;
+    color:var(--ink);
+    margin-bottom:3px;
+    line-height:1.2;
+  }
+
+  .cart-item-variant{
+    font-size:10px;
+    letter-spacing:1.5px;
+    color:var(--orange);
+    text-transform:uppercase;
+    font-weight:800;
+    margin-bottom:3px;
+  }
+
+  .cart-item-price{
+    font-size:12px;
+    color:var(--ink-dim);
+    letter-spacing:0.5px;
+    font-weight:600;
+    font-variant-numeric:tabular-nums lining-nums;
+  }
+
+  .cart-item-qty{
+    display:flex;
+    align-items:center;
+    background:#fff;
+    border:2px solid rgba(43,26,15,0.12);
+    border-radius:10px;
+    overflow:hidden;
+    flex-shrink:0;
+  }
+
+  .cart-qty-btn{
+    width:34px;
+    height:36px;
+    background:transparent;
+    border:none;
+    color:var(--orange);
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+    transition:background .2s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .cart-qty-btn:active{ background:#fff5eb; }
+
+  .cart-qty-value{
+    width:30px;
+    height:36px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:18px;
+    color:var(--ink);
+    border-left:1.5px solid rgba(43,26,15,0.08);
+    border-right:1.5px solid rgba(43,26,15,0.08);
+    font-variant-numeric:tabular-nums;
+  }
+
+  .cart-footer{
+    padding:16px 22px 22px;
+    border-top:2px solid rgba(232,92,31,0.14);
+    background:rgba(253,246,233,0.5);
+  }
+
+  .cart-total-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:16px;
+  }
+
+  .cart-total-label{
+    font-size:12px;
+    letter-spacing:2.5px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    font-weight:800;
+  }
+
+  .cart-total-value{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:38px;
+    font-weight:400;
+    color:var(--orange);
+    font-variant-numeric:tabular-nums lining-nums;
+    font-feature-settings:"tnum" 1, "lnum" 1;
+    letter-spacing:1px;
+  }
+
+  .cart-checkout{
+    width:100%;
+    padding:18px;
+    border-radius:14px;
+    background:var(--orange);
+    border:none;
+    color:#fff;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:all .25s;
+    box-shadow:0 6px 22px rgba(232,92,31,0.4);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  }
+
+  .cart-checkout:active{
+    transform:scale(0.98);
+    background:var(--orange-deep);
+  }
+
+  .cart-checkout svg{ width:18px; height:18px; stroke-width:2.2; }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeInUp{
+    from{ opacity:0; transform:translateY(16px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  @keyframes fadeInDown{
+    from{ opacity:0; transform:translateY(-16px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  @keyframes fadeIn{
+    from{ opacity:0; }
+    to{ opacity:1; }
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media(max-width:380px){
+    .hero-title{ font-size:48px; letter-spacing:3px; }
+    .category-title{ font-size:24px; letter-spacing:3px; }
+    .dish-name{ font-size:17px; }
+    .dish-price{ font-size:24px; }
+    .hf-value{ font-size:18px; min-width:48px; }
+    .logo-dreams{ font-size:24px; }
+    .logo-cafe{ font-size:16px; letter-spacing:5px; }
+    .logo-tagline{ font-size:7px; letter-spacing:2px; }
+    .modal-title{ font-size:28px; }
+    .cart-title{ font-size:22px; }
+    .cart-total-value{ font-size:32px; }
+    .portion-btn{ min-width:110px; padding:14px 14px; }
+    .portion-btn-price{ font-size:20px; }
+    .hero-sub{ font-size:13px; }
+    .filter-chip{ padding:9px 14px; font-size:11px; }
+  }
+
+  @media(min-width:640px){
+    .hero-title{ font-size:80px; }
+    .category-title{ font-size:34px; }
+    .dish-name{ font-size:21px; }
+    .menu-wrap{ max-width:720px; }
+    .filter-bar{ justify-content:center; }
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      animation-duration:0.01ms !important;
+      transition-duration:0.01ms !important;
+    }
+  }
+</style>
+</head><body>
+
+  <div class="topbar">
+    <div class="logo-block">
+      <div class="logo-dreams">DREAMS</div>
+      <div class="logo-cafe">CAFE</div>
+      <div class="logo-tagline">A Fabulous Restaurant in Karnal</div>
+    </div>
+    <button class="cart-btn" id="cartBtn" aria-label="Cart" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"/>
+        <circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      </svg>
+      <span class="cart-count hidden" id="cartCount">0</span>
+    </button>
+  </div>
+
+  <section class="hero">
+    <div class="hero-eyebrow">Order from your table</div>
+    <h1 class="hero-title">The <span class="accent">Menu</span></h1>
+    <div class="hero-sub">Tap any dish to add to your order, then tap View Order below</div>
+  </section>
+
+  <div class="legend">
+    <div class="legend-item">
+      <span class="legend-mark"></span>
+      Pure Veg
+    </div>
+  </div>
+
+  <div class="filter-wrap">
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-chip active" data-filter="all" type="button">All</button>
+      <button class="filter-chip" data-filter="sandwich" type="button">Sandwich</button>
+      <button class="filter-chip" data-filter="chowmein" type="button">Chowmein</button>
+      <button class="filter-chip" data-filter="pasta" type="button">Pasta</button>
+      <button class="filter-chip" data-filter="burger" type="button">Burger</button>
+      <button class="filter-chip" data-filter="pizza" type="button">Pizza</button>
+      <button class="filter-chip" data-filter="shakes" type="button">Shakes</button>
+      <button class="filter-chip" data-filter="chinese" type="button">Chinese Veg</button>
+      <button class="filter-chip" data-filter="fries" type="button">French Fries</button>
+      <button class="filter-chip" data-filter="tandoorichaap" type="button">Tandoori Chaap</button>
+      <button class="filter-chip" data-filter="paneergravy" type="button">Paneer Gravy</button>
+      <button class="filter-chip" data-filter="gravychaap" type="button">Gravy Chaap</button>
+      <button class="filter-chip" data-filter="roti" type="button">Roti</button>
+      <button class="filter-chip" data-filter="rice" type="button">Rice</button>
+      <button class="filter-chip" data-filter="maggi" type="button">Maggi</button>
+    </div>
+  </div>
+
+  <main class="menu-wrap">
+
+    <!-- SANDWICH -->
+    <section class="category" data-category="sandwich">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Sandwich</div><div class="category-line right"></div></div>
+      <div class="dish" data-name="Veg Sandwich" data-price="90" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Veg Sandwich</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>90</div></div></div>
+      <div class="dish" data-name="Cheese Sandwich" data-price="120" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Cheese Sandwich</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>120</div></div></div>
+      <div class="dish" data-name="Paneer Sandwich" data-price="120" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Paneer Sandwich</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>120</div></div></div>
+      <div class="dish" data-name="Cheese Corn Sandwich" data-price="140" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Cheese Corn Sandwich</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>140</div></div></div>
+    </section>
+
+    <!-- CHOWMEIN -->
+    <section class="category" data-category="chowmein">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Chowmein</div><div class="category-line right"></div></div>
+      <div class="dish half-full" data-name="Veg Chowmein" data-half-price="80" data-full-price="120" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Veg Chowmein</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>80</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>120</span></div></div></div>
+      <div class="dish half-full" data-name="Singapore Style Noodles" data-half-price="90" data-full-price="140" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Singapore Style Noodles</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>90</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>140</span></div></div></div>
+      <div class="dish" data-name="Hakka Noodles" data-price="150" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Hakka Noodles</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>150</div></div></div>
+      <div class="dish" data-name="Chilli Garlic Noodles" data-price="140" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Chilli Garlic Noodles</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>140</div></div></div>
+    </section>
+
+    <!-- PASTA -->
+    <section class="category" data-category="pasta">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Pasta</div><div class="category-line right"></div></div>
+      <div class="dish" data-name="Green Sauce Pasta" data-price="140" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Green Sauce Pasta</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>140</div></div></div>
+      <div class="dish" data-name="Mix Sauce Pasta" data-price="120" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Mix Sauce Pasta</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>120</div></div></div>
+      <div class="dish" data-name="Tandoori Sauce Pasta" data-price="170" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Tandoori Sauce Pasta</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>170</div></div></div>
+      <div class="dish" data-name="Red Sauce Pasta" data-price="170" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Red Sauce Pasta</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>170</div></div></div>
+      <div class="dish" data-name="White Sauce Pasta" data-price="180" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">White Sauce Pasta</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>180</div></div></div>
+    </section>
+
+    <!-- BURGER -->
+    <section class="category" data-category="burger">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Burger</div><div class="category-line right"></div></div>
+      <div class="dish" data-name="Veg Burger" data-price="30" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Veg Burger</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>30</div></div></div>
+      <div class="dish" data-name="Tikki Burger" data-price="40" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Tikki Burger</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>40</div></div></div>
+      <div class="dish" data-name="Paneer Burger" data-price="50" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Paneer Burger</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>50</div></div></div>
+      <div class="dish" data-name="Cafe Special Burger" data-price="60" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Cafe Special Burger</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>60</div></div></div>
+    </section>
+
+    <!-- PIZZA -->
+    <section class="category" data-category="pizza">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Pizza</div><div class="category-line right"></div></div>
+      <div class="dish half-full" data-name="Cheese Onion Pizza" data-half-price="100" data-full-price="140" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Cheese Onion Pizza</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Small · Large</div><div class="hf-price-row"><span class="hf-tag">Small</span><span class="hf-value"><span class="rupee">₹</span>100</span></div><div class="hf-price-row"><span class="hf-tag">Large</span><span class="hf-value"><span class="rupee">₹</span>140</span></div></div></div>
+      <div class="dish half-full" data-name="Cheese Onion Tomato Pizza" data-half-price="120" data-full-price="160" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Cheese Onion Tomato Pizza</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Small · Large</div><div class="hf-price-row"><span class="hf-tag">Small</span><span class="hf-value"><span class="rupee">₹</span>120</span></div><div class="hf-price-row"><span class="hf-tag">Large</span><span class="hf-value"><span class="rupee">₹</span>160</span></div></div></div>
+      <div class="dish half-full" data-name="Cheese Capsicum Pizza" data-half-price="130" data-full-price="170" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Cheese Capsicum Pizza</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Small · Large</div><div class="hf-price-row"><span class="hf-tag">Small</span><span class="hf-value"><span class="rupee">₹</span>130</span></div><div class="hf-price-row"><span class="hf-tag">Large</span><span class="hf-value"><span class="rupee">₹</span>170</span></div></div></div>
+      <div class="dish half-full" data-name="Cheese Mushroom Onion Pizza" data-half-price="140" data-full-price="180" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Cheese Mushroom Onion Pizza</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Small · Large</div><div class="hf-price-row"><span class="hf-tag">Small</span><span class="hf-value"><span class="rupee">₹</span>140</span></div><div class="hf-price-row"><span class="hf-tag">Large</span><span class="hf-value"><span class="rupee">₹</span>180</span></div></div></div>
+      <div class="dish half-full" data-name="Cafe Special Pizza" data-half-price="170" data-full-price="240" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Cafe Special Pizza</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Small · Large</div><div class="hf-price-row"><span class="hf-tag">Small</span><span class="hf-value"><span class="rupee">₹</span>170</span></div><div class="hf-price-row"><span class="hf-tag">Large</span><span class="hf-value"><span class="rupee">₹</span>240</span></div></div></div>
+    </section>
+
+    <!-- SHAKES -->
+    <section class="category" data-category="shakes">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Shakes</div><div class="category-line right"></div></div>
+      <div class="dish" data-name="Cold Coffee" data-price="80" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Cold Coffee</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>80</div></div></div>
+      <div class="dish" data-name="Oreo Shake" data-price="110" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Oreo Shake</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>110</div></div></div>
+      <div class="dish" data-name="Chocolate Shake" data-price="110" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Chocolate Shake</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>110</div></div></div>
+      <div class="dish" data-name="Butterscotch Shake" data-price="80" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Butterscotch Shake</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>80</div></div></div>
+      <div class="dish" data-name="Strawberry Shake" data-price="80" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Strawberry Shake</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>80</div></div></div>
+      <div class="dish" data-name="Banana Shake" data-price="70" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Banana Shake</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>70</div></div></div>
+      <div class="dish" data-name="Mango Shake" data-price="80" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Mango Shake</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>80</div></div></div>
+      <div class="dish" data-name="Papaya Shake" data-price="80" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Papaya Shake</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>80</div></div></div>
+    </section>
+
+    <!-- CHINESE VEG -->
+    <section class="category" data-category="chinese">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Chinese Veg</div><div class="category-line right"></div></div>
+      <div class="dish" data-name="Veg Manchurian" data-price="170" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Veg Manchurian</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>170</div></div></div>
+      <div class="dish" data-name="Veg Manchurian Gravy" data-price="180" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Veg Manchurian Gravy</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>180</div></div></div>
+      <div class="dish" data-name="Chilli Dry" data-price="200" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Chilli Dry</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>200</div></div></div>
+      <div class="dish" data-name="Cheese Chilli Gravy" data-price="220" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Cheese Chilli Gravy</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>220</div></div></div>
+      <div class="dish" data-name="Chilli Potato Dry" data-price="130" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Chilli Potato Dry</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>130</div></div></div>
+      <div class="dish" data-name="Honey Chilli Potato" data-price="150" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Honey Chilli Potato</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>150</div></div></div>
+      <div class="dish" data-name="Chilli Chaap" data-price="150" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Chilli Chaap</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>150</div></div></div>
+    </section>
+
+    <!-- FRENCH FRIES -->
+    <section class="category" data-category="fries">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">French Fries</div><div class="category-line right"></div></div>
+      <div class="dish half-full" data-name="French Fry" data-half-price="70" data-full-price="120" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">French Fry</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>70</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>120</span></div></div></div>
+      <div class="dish half-full" data-name="Peri Peri Fry" data-half-price="90" data-full-price="130" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Peri Peri Fry</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>90</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>130</span></div></div></div>
+      <div class="dish half-full" data-name="Spring Roll Veg" data-half-price="70" data-full-price="110" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Spring Roll Veg</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>70</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>110</span></div></div></div>
+      <div class="dish half-full" data-name="Veg Momos Steam" data-half-price="70" data-full-price="110" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Veg Momos Steam</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>70</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>110</span></div></div></div>
+      <div class="dish half-full" data-name="Veg Momos Fry" data-half-price="70" data-full-price="110" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Veg Momos Fry</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>70</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>110</span></div></div></div>
+      <div class="dish half-full" data-name="Paneer Momos Steam" data-half-price="100" data-full-price="150" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Paneer Momos Steam</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>100</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>150</span></div></div></div>
+      <div class="dish half-full" data-name="Paneer Momos Fry" data-half-price="100" data-full-price="150" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Paneer Momos Fry</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>100</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>150</span></div></div></div>
+      <div class="dish" data-name="Veg Momos Gravy" data-price="180" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Veg Momos Gravy</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>180</div></div></div>
+      <div class="dish" data-name="Chilli Momos Veg" data-price="180" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Chilli Momos Veg</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>180</div></div></div>
+      <div class="dish" data-name="Paneer Chilli Momos" data-price="200" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Paneer Chilli Momos</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>200</div></div></div>
+      <div class="dish" data-name="Paneer Finger" data-price="200" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Paneer Finger</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>200</div></div></div>
+    </section>
+
+    <!-- TANDOORI CHAAP -->
+    <section class="category" data-category="tandoorichaap">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Tandoori Chaap</div><div class="category-line right"></div></div>
+      <div class="dish half-full" data-name="Tandoori Masala Chaap" data-half-price="110" data-full-price="200" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Tandoori Masala Chaap</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>110</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>200</span></div></div></div>
+      <div class="dish half-full" data-name="Malai Chaap Tandoori" data-half-price="130" data-full-price="220" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Malai Chaap Tandoori</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>130</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>220</span></div></div></div>
+      <div class="dish half-full" data-name="Lemon Chaap" data-half-price="150" data-full-price="220" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Lemon Chaap</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>150</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>220</span></div></div></div>
+      <div class="dish half-full" data-name="Afghani Tandoori Chaap" data-half-price="170" data-full-price="230" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Afghani Tandoori Chaap</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>170</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>230</span></div></div></div>
+      <div class="dish half-full" data-name="Achari Chaap Tandoori" data-half-price="140" data-full-price="200" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Achari Chaap Tandoori</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>140</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>200</span></div></div></div>
+      <div class="dish" data-name="Paneer Tikka" data-price="230" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Paneer Tikka</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>230</div></div></div>
+      <div class="dish" data-name="Paneer Malai Tikka" data-price="250" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Paneer Malai Tikka</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>250</div></div></div>
+      <div class="dish" data-name="Paneer Achari Tikka" data-price="270" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Paneer Achari Tikka</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>270</div></div></div>
+      <div class="dish" data-name="Mushroom Tikka" data-price="200" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Mushroom Tikka</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>200</div></div></div>
+    </section>
+
+    <!-- PANEER GRAVY -->
+    <section class="category" data-category="paneergravy">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Paneer Gravy</div><div class="category-line right"></div></div>
+      <div class="dish" data-name="Dal Makhani" data-price="200" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Dal Makhani</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>200</div></div></div>
+      <div class="dish" data-name="Matar Paneer" data-price="260" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Matar Paneer</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>260</div></div></div>
+      <div class="dish" data-name="Shahi Paneer" data-price="270" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Shahi Paneer</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>270</div></div></div>
+      <div class="dish" data-name="Paneer Butter Masala" data-price="280" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Paneer Butter Masala</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>280</div></div></div>
+    </section>
+
+    <!-- GRAVY CHAAP -->
+    <section class="category" data-category="gravychaap">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Gravy Chaap</div><div class="category-line right"></div></div>
+      <div class="dish half-full" data-name="Gravy Chaap" data-half-price="120" data-full-price="200" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Gravy Chaap</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>120</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>200</span></div></div></div>
+      <div class="dish half-full" data-name="Masala Gravy" data-half-price="130" data-full-price="230" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Masala Gravy</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>130</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>230</span></div></div></div>
+      <div class="dish half-full" data-name="Kadhai Chaap" data-half-price="150" data-full-price="250" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Kadhai Chaap</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>150</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>250</span></div></div></div>
+      <div class="dish half-full" data-name="Butter Masala Chaap" data-half-price="150" data-full-price="250" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Butter Masala Chaap</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>150</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>250</span></div></div></div>
+      <div class="dish half-full" data-name="Lemon Gravy Chaap" data-half-price="150" data-full-price="250" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Lemon Gravy Chaap</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>150</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>250</span></div></div></div>
+      <div class="dish half-full" data-name="Kali Mirch Gravy Chaap" data-half-price="150" data-full-price="250" data-has-half="true" data-has-full="true" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Kali Mirch Gravy Chaap</div></div><div class="dish-price-wrap half-full-wrap"><div class="hf-label">Half · Full</div><div class="hf-price-row"><span class="hf-tag">Half</span><span class="hf-value"><span class="rupee">₹</span>150</span></div><div class="hf-price-row"><span class="hf-tag">Full</span><span class="hf-value"><span class="rupee">₹</span>250</span></div></div></div>
+    </section>
+
+    <!-- ROTI -->
+    <section class="category" data-category="roti">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Roti</div><div class="category-line right"></div></div>
+      <div class="dish" data-name="Plain Roti" data-price="15" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Plain Roti</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>15</div></div></div>
+      <div class="dish" data-name="Butter Roti" data-price="20" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Butter Roti</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>20</div></div></div>
+      <div class="dish" data-name="Plain Naan" data-price="50" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Plain Naan</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>50</div></div></div>
+      <div class="dish" data-name="Butter Naan" data-price="60" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Butter Naan</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>60</div></div></div>
+      <div class="dish" data-name="Missi Roti" data-price="30" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Missi Roti</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>30</div></div></div>
+      <div class="dish" data-name="Onion Roti" data-price="40" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Onion Roti</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>40</div></div></div>
+    </section>
+
+    <!-- RICE -->
+    <section class="category" data-category="rice">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Rice</div><div class="category-line right"></div></div>
+      <div class="dish" data-name="Plain Rice" data-price="110" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Plain Rice</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>110</div></div></div>
+      <div class="dish" data-name="Jeera Rice" data-price="150" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Jeera Rice</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>150</div></div></div>
+      <div class="dish" data-name="Fried Rice" data-price="180" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Fried Rice</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>180</div></div></div>
+      <div class="dish" data-name="Fried Rice Paneer" data-price="220" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Fried Rice Paneer</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>220</div></div></div>
+    </section>
+
+    <!-- MAGGI -->
+    <section class="category" data-category="maggi">
+      <div class="category-header"><div class="category-line"></div><div class="category-title">Maggi</div><div class="category-line right"></div></div>
+      <div class="dish" data-name="Spanish Maggi" data-price="130" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Spanish Maggi</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>130</div></div></div>
+      <div class="dish" data-name="Cream Maggi" data-price="100" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Cream Maggi</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>100</div></div></div>
+      <div class="dish" data-name="Simple Maggi" data-price="80" data-veg="true"><span class="veg-mark"></span><div class="dish-info"><div class="dish-name">Simple Maggi</div></div><div class="dish-price-wrap"><div class="dish-price"><span class="rupee">₹</span>80</div></div></div>
+    </section>
+
+  </main>
+
+  <div class="menu-note">
+    <p>All prices are in Indian rupees and exclusive of taxes.</p>
+    <p>Please advise us if you are allergic to any ingredient.</p>
+    <p>Outside food and drinks are not allowed in the cafe premises.</p>
+    <p>To ensure the highest quality and freshness, please allow 15–30 minutes for your order to be prepared and served.</p>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-location">Dreams Cafe · Karnal</div>
+    <a href="https://vaan-consultancy.pages.dev" target="_blank" rel="noopener" class="footer-powered">
+      Powered by <span>VAAN</span>
+    </a>
+  </footer>
+
+  <div class="bottombar" id="bottombar">
+    <button class="bottom-action primary" id="viewCartBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"/>
+        <circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      </svg>
+      View Order
+    </button>
+    <a href="tel:+919991444458" class="bottom-action">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      Call
+    </a>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+
+  <div class="modal" id="dishModal">
+    <div class="modal-handle"></div>
+    <button class="modal-close" id="modalClose" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <div class="modal-content">
+      <div class="modal-eyebrow" id="modalEyebrow">Pure Veg</div>
+      <h2 class="modal-title" id="modalTitle">Dish Name</h2>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-divider"></div>
+
+      <div class="portion-section" id="portionSection" style="display:none;">
+        <div class="portion-label" id="portionLabel">Choose your portion</div>
+        <div class="portion-options" id="portionOptions"></div>
+      </div>
+
+      <div class="modal-actions">
+        <div class="qty-control">
+          <button class="qty-btn" id="qtyMinus" type="button">−</button>
+          <div class="qty-value" id="qtyValue">1</div>
+          <button class="qty-btn" id="qtyPlus" type="button">+</button>
+        </div>
+        <button class="add-to-cart-btn" id="addToCartBtn" type="button">Add to Order</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="modal-handle"></div>
+    <div class="cart-header">
+      <div style="display:flex; align-items:center; min-width:0;">
+        <div class="cart-title">Your Order</div>
+        <div class="cart-table-tag" id="cartTableTag" style="display:none;">Table</div>
+      </div>
+      <button class="modal-close" id="cartClose" type="button" style="position:relative; top:0; right:0;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">
+        <div class="cart-empty-title">Your order is empty</div>
+        <div class="cart-empty-desc">Tap any dish from the menu<br>to add it to your order</div>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total-row">
+        <div class="cart-total-label">Total</div>
+        <div class="cart-total-value" id="cartTotal">₹0</div>
+      </div>
+      <button class="cart-checkout" id="checkoutBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+        Send Order on WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const CAFE_WHATSAPP = '919991444458';
+    const CAFE_NAME = 'Dreams Cafe';
+
+    // ============ TABLE DETECTION FROM URL ============
+    let tableNumber = '';
+    (function detectTable(){
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const t = params.get('t');
+        if (t && /^\d+$/.test(t)){
+          tableNumber = t;
+          const tag = document.getElementById('cartTableTag');
+          if (tag){
+            tag.textContent = 'Table ' + t;
+            tag.style.display = 'inline-block';
+          }
+          document.title = 'Table ' + t + ' — ' + CAFE_NAME;
+        }
+      } catch(e){}
+    })();
+
+    let cart = [];
+    try {
+      const saved = localStorage.getItem('dreams_cart_v1');
+      if (saved) cart = JSON.parse(saved);
+    } catch(e){ cart = []; }
+
+    let currentQty = 1;
+    let selectedPortion = null;
+
+    const cartCountEl = document.getElementById('cartCount');
+    const cartBtn = document.getElementById('cartBtn');
+    const viewCartBtn = document.getElementById('viewCartBtn');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartClose = document.getElementById('cartClose');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartEmpty = document.getElementById('cartEmpty');
+    const cartFooter = document.getElementById('cartFooter');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    const modal = document.getElementById('dishModal');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalClose = document.getElementById('modalClose');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalEyebrow = document.getElementById('modalEyebrow');
+    const modalDesc = document.getElementById('modalDesc');
+    const qtyValue = document.getElementById('qtyValue');
+    const qtyMinus = document.getElementById('qtyMinus');
+    const qtyPlus = document.getElementById('qtyPlus');
+    const addToCartBtn = document.getElementById('addToCartBtn');
+
+    const portionSection = document.getElementById('portionSection');
+    const portionLabel = document.getElementById('portionLabel');
+    const portionOptions = document.getElementById('portionOptions');
+
+    const filterBar = document.getElementById('filterBar');
+    const bottombar = document.getElementById('bottombar');
+
+    function saveCart(){
+      try { localStorage.setItem('dreams_cart_v1', JSON.stringify(cart)); } catch(e){}
+    }
+
+    function lineKey(name, variant){
+      return name + '::' + (variant || '');
+    }
+
+    function addToCart(name, price, qty, variant){
+      qty = qty || 1;
+      variant = variant || '';
+      const key = lineKey(name, variant);
+      const existing = cart.find(item => lineKey(item.name, item.variant) === key);
+      if (existing){ existing.qty += qty; }
+      else { cart.push({ name: name, price: price, qty: qty, variant: variant }); }
+      saveCart();
+      updateCartUI();
+      bounceCart();
+    }
+
+    function removeFromCart(name, variant){
+      const key = lineKey(name, variant);
+      cart = cart.filter(item => lineKey(item.name, item.variant) !== key);
+      saveCart();
+      updateCartUI();
+    }
+
+    function changeQty(name, variant, delta){
+      const key = lineKey(name, variant);
+      const item = cart.find(i => lineKey(i.name, i.variant) === key);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0){ removeFromCart(name, variant); }
+      else { saveCart(); updateCartUI(); }
+    }
+
+    function cartTotal(){ return cart.reduce((sum, item) => sum + (item.price * item.qty), 0); }
+    function cartCount(){ return cart.reduce((sum, item) => sum + item.qty, 0); }
+
+    function bounceCart(){
+      cartCountEl.classList.remove('bounce');
+      void cartCountEl.offsetWidth;
+      cartCountEl.classList.add('bounce');
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function escapeAttr(s){ return escapeHtml(s); }
+
+    function updateCartUI(){
+      const count = cartCount();
+      if (count === 0){ cartCountEl.classList.add('hidden'); }
+      else { cartCountEl.classList.remove('hidden'); cartCountEl.textContent = count; }
+
+      cartItemsEl.querySelectorAll('.cart-item').forEach(el => el.remove());
+
+      if (cart.length === 0){
+        cartEmpty.style.display = 'block';
+        cartFooter.style.display = 'none';
+      } else {
+        cartEmpty.style.display = 'none';
+        cartFooter.style.display = 'block';
+
+        cart.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'cart-item';
+          const variantHtml = item.variant ? `<div class="cart-item-variant">${escapeHtml(item.variant)}</div>` : '';
+          row.innerHTML = `
+            <div class="cart-item-info">
+              <div class="cart-item-name">${escapeHtml(item.name)}</div>
+              ${variantHtml}
+              <div class="cart-item-price">₹${item.price} × ${item.qty} = ₹${item.price * item.qty}</div>
+            </div>
+            <div class="cart-item-qty">
+              <button class="cart-qty-btn" data-action="minus" data-name="${escapeAttr(item.name)}" data-variant="${escapeAttr(item.variant || '')}" type="button">−</button>
+              <div class="cart-qty-value">${item.qty}</div>
+              <button class="cart-qty-btn" data-action="plus" data-name="${escapeAttr(item.name)}" data-variant="${escapeAttr(item.variant || '')}" type="button">+</button>
+            </div>
+          `;
+          cartItemsEl.appendChild(row);
+        });
+
+        cartTotalEl.textContent = '₹' + cartTotal();
+      }
+
+      if (cartCount() > 0){ cartBtn.classList.add('has-items'); }
+      else { cartBtn.classList.remove('has-items'); }
+    }
+
+    document.querySelectorAll('.dish').forEach(dish => {
+      dish.addEventListener('click', () => {
+        const name = dish.getAttribute('data-name');
+        const note = dish.getAttribute('data-note') || '';
+
+        dish.classList.remove('ripple');
+        void dish.offsetWidth;
+        dish.classList.add('ripple');
+
+        openDishModal(dish, name, note);
+      });
+    });
+
+    function openDishModal(dishEl, name, note){
+      currentQty = 1;
+      qtyValue.textContent = currentQty;
+      modalTitle.textContent = name;
+      modalDesc.textContent = note || '';
+      modalDesc.style.display = note ? 'block' : 'none';
+
+      modalEyebrow.textContent = 'Pure Veg';
+
+      const isHalfFull = dishEl.classList.contains('half-full');
+      const singlePrice = parseInt(dishEl.getAttribute('data-price')) || 0;
+
+      portionOptions.innerHTML = '';
+      selectedPortion = null;
+
+      if (isHalfFull){
+        portionSection.style.display = 'block';
+
+        const halfPrice = parseInt(dishEl.getAttribute('data-half-price')) || 0;
+        const fullPrice = parseInt(dishEl.getAttribute('data-full-price')) || 0;
+        const hasHalf = dishEl.getAttribute('data-has-half') === 'true';
+        const hasFull = dishEl.getAttribute('data-has-full') === 'true';
+
+        const labelText = dishEl.getAttribute('data-portion-label') || 'Choose your portion';
+        portionLabel.textContent = labelText;
+
+        if (hasHalf){
+          const halfLabel = dishEl.getAttribute('data-half-label') || 'Half';
+          portionOptions.appendChild(buildPortionBtn(halfLabel, halfPrice, () => {
+            selectedPortion = { label: halfLabel, price: halfPrice };
+            addToCartBtn.disabled = false;
+            addToCartBtn.textContent = `Add ₹${halfPrice * currentQty}`;
+          }));
+        }
+
+        if (hasFull){
+          const fullLabel = dishEl.getAttribute('data-full-label') || 'Full';
+          portionOptions.appendChild(buildPortionBtn(fullLabel, fullPrice, () => {
+            selectedPortion = { label: fullLabel, price: fullPrice };
+            addToCartBtn.disabled = false;
+            addToCartBtn.textContent = `Add ₹${fullPrice * currentQty}`;
+          }));
+        }
+
+        if (portionOptions.children.length === 1){ portionOptions.firstChild.click(); }
+        else { addToCartBtn.disabled = true; addToCartBtn.textContent = 'Select portion'; }
+
+      } else {
+        portionSection.style.display = 'none';
+        if (singlePrice > 0){
+          selectedPortion = { label: '', price: singlePrice };
+          addToCartBtn.disabled = false;
+          addToCartBtn.textContent = `Add ₹${singlePrice}`;
+        } else {
+          selectedPortion = { label: '', price: 0 };
+          addToCartBtn.disabled = false;
+          addToCartBtn.textContent = 'Enquire on WhatsApp';
+        }
+      }
+
+      modal.classList.add('show');
+      modalBackdrop.classList.add('show');
+      document.body.classList.add('no-scroll');
+    }
+
+    function buildPortionBtn(label, price, onClick){
+      const btn = document.createElement('button');
+      btn.className = 'portion-btn';
+      btn.type = 'button';
+      btn.innerHTML = `
+        <span class="portion-btn-text">
+          <span class="portion-btn-label">${label}</span>
+          <span class="portion-btn-price">₹${price}</span>
+        </span>
+      `;
+      btn.addEventListener('click', () => {
+        portionOptions.querySelectorAll('.portion-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        onClick();
+      });
+      return btn;
+    }
+
+    function closeDishModal(){
+      modal.classList.remove('show');
+      if (!cartDrawer.classList.contains('show')){
+        modalBackdrop.classList.remove('show');
+        document.body.classList.remove('no-scroll');
+      }
+    }
+
+    modalClose.addEventListener('click', closeDishModal);
+    modalBackdrop.addEventListener('click', () => { closeDishModal(); closeCart(); });
+
+    qtyMinus.addEventListener('click', () => {
+      if (currentQty > 1){
+        currentQty--;
+        qtyValue.textContent = currentQty;
+        if (selectedPortion && selectedPortion.price > 0){
+          addToCartBtn.textContent = `Add ₹${selectedPortion.price * currentQty}`;
+        }
+      }
+    });
+
+    qtyPlus.addEventListener('click', () => {
+      currentQty++;
+      qtyValue.textContent = currentQty;
+      if (selectedPortion && selectedPortion.price > 0){
+        addToCartBtn.textContent = `Add ₹${selectedPortion.price * currentQty}`;
+      }
+    });
+
+    addToCartBtn.addEventListener('click', () => {
+      if (!selectedPortion) return;
+      const dishName = modalTitle.textContent;
+      const variant = selectedPortion.label || '';
+
+      if (selectedPortion.price === 0){
+        const msg = encodeURIComponent('Hi, I want to enquire about ' + dishName + ' from ' + CAFE_NAME);
+        window.open('https://wa.me/' + CAFE_WHATSAPP + '?text=' + msg, '_blank');
+        closeDishModal();
+        return;
+      }
+
+      addToCart(dishName, selectedPortion.price, currentQty, variant);
+      closeDishModal();
+    });
+
+    function openCart(){
+      cartDrawer.classList.add('show');
+      modalBackdrop.classList.add('show');
+      document.body.classList.add('no-scroll');
+      updateCartUI();
+    }
+
+    function closeCart(){
+      cartDrawer.classList.remove('show');
+      if (!modal.classList.contains('show')){
+        modalBackdrop.classList.remove('show');
+        document.body.classList.remove('no-scroll');
+      }
+    }
+
+    cartBtn.addEventListener('click', openCart);
+    viewCartBtn.addEventListener('click', openCart);
+    cartClose.addEventListener('click', closeCart);
+
+    cartItemsEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.cart-qty-btn');
+      if (!btn) return;
+      const action = btn.getAttribute('data-action');
+      const name = btn.getAttribute('data-name');
+      const variant = btn.getAttribute('data-variant') || '';
+      if (action === 'plus') changeQty(name, variant, 1);
+      else if (action === 'minus') changeQty(name, variant, -1);
+    });
+
+    checkoutBtn.addEventListener('click', () => {
+      if (cart.length === 0) return;
+
+      let header = 'Hi, I would like to place an order from ' + CAFE_NAME;
+      if (tableNumber){
+        header += ' — Table ' + tableNumber;
+      }
+      header += ':%0A%0A';
+
+      let msg = header;
+      cart.forEach((item, i) => {
+        const variantLabel = item.variant ? ' (' + item.variant + ')' : '';
+        msg += (i + 1) + '. ' + item.name + variantLabel + ' × ' + item.qty + ' — ₹' + (item.price * item.qty) + '%0A';
+      });
+      msg += '%0A*Total: ₹' + cartTotal() + '*%0A%0AThanks!';
+      window.open('https://wa.me/' + CAFE_WHATSAPP + '?text=' + msg, '_blank');
+    });
+
+    filterBar.addEventListener('click', (e) => {
+      const chip = e.target.closest('.filter-chip');
+      if (!chip) return;
+      const filter = chip.getAttribute('data-filter');
+
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      chip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+
+      document.querySelectorAll('.category').forEach(cat => {
+        if (filter === 'all'){ cat.classList.remove('hidden'); }
+        else if (cat.getAttribute('data-category') === filter){ cat.classList.remove('hidden'); }
+        else { cat.classList.add('hidden'); }
+      });
+
+      if (filter !== 'all'){
+        setTimeout(() => {
+          const firstVisible = document.querySelector('.category:not(.hidden)');
+          if (firstVisible){
+            const top = firstVisible.getBoundingClientRect().top + window.scrollY - 150;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        }, 120);
+      }
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting){
+          setTimeout(() => { entry.target.classList.add('revealed'); }, i * 40);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.dish').forEach(dish => revealObserver.observe(dish));
+
+    setTimeout(() => {
+      document.querySelectorAll('.dish:not(.revealed)').forEach(d => d.classList.add('revealed'));
+    }, 5000);
+
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y > lastScroll && y > 220){ bottombar.classList.add('hide-on-top'); }
+      else { bottombar.classList.remove('hide-on-top'); }
+      lastScroll = y;
+    }, { passive: true });
+
+    updateCartUI();
+
+    document.addEventListener('touchmove', (e) => {
+      if (document.body.classList.contains('no-scroll') && !e.target.closest('.modal, .cart-drawer')){
+        e.preventDefault();
+      }
+    }, { passive: false });
+  </script>
+
+</body>
+</html>
